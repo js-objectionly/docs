@@ -1,8 +1,127 @@
 ---
-title: Zoom
-description: Connect your Zoom account to Objectionly
+title: Zoom Integration
+description: Connect your Zoom account to Objectionly to automatically capture, transcribe, and analyze your sales calls.
 ---
 
-# Zoom
+<Card title="What You'll Need">
+- An active Objectionly account with a billing plan
+- A Zoom account with meeting host permissions
+- Cloud recording and transcription enabled in Zoom
+</Card>
 
-Learn how to integrate your Zoom account with Objectionly to automatically capture and analyze your sales calls.
+## Getting Started
+
+<Steps>
+  <Step title="Create Your Objectionly Account">
+    Visit [app.objectionly.com](https://app.objectionly.com/) and create your account if you haven't already.
+  </Step>
+  
+  <Step title="Subscribe to a Plan">
+    Navigate to the [billing page](https://app.objectionly.com/dashboard/billing) and subscribe to any plan.
+    
+    <Warning>
+      An active billing plan is required for all integrations with Objectionly.
+    </Warning>
+  </Step>
+  
+  <Step title="Connect Your Zoom Account">
+    1. Go to the [integrations page](https://app.objectionly.com/dashboard/integrations)
+    2. Find the Zoom Integration section
+    3. Click the **"Connect To Zoom"** button
+    4. Complete the authentication process on Zoom's website
+    5. You'll be redirected back to Objectionly with a confirmation
+    
+  </Step>
+  
+  <Step title="Import Historical Data (Optional)">
+    To view data from your recent meetings:
+    
+    1. Click **"Import Last 10 Meetings"**
+    2. Review the import summary showing what data has been imported
+    
+
+    
+    <Info>
+      This step is optional but recommended to get started with sample data.
+    </Info>
+  </Step>
+</Steps>
+
+## Automatic Meeting Processing
+
+<Card title="How It Works">
+Once connected, all new Zoom meetings will automatically be sent to Objectionly for AI-powered analysis and insights.
+</Card>
+
+### Processing Timeline
+
+<Callout icon="clock">
+  **Processing Time**: Transcripts are processed when Zoom completes the recording, typically taking up to 2x the meeting duration.
+</Callout>
+
+## Requirements & Setup
+
+<CardGroup cols={2}>
+  <Card title="Cloud Recording" icon="cloud">
+    Meetings must be recorded to the cloud (not local recording) for automatic import.
+  </Card>
+  
+  <Card title="Audio Transcription" icon="microphone">
+    Transcription must be enabled in your Zoom settings for text analysis.
+  </Card>
+</CardGroup>
+
+### Configuring Zoom Settings
+
+Need help with your Zoom configuration? Use these official Zoom guides:
+
+<AccordionGroup>
+  <Accordion title="Enabling Audio Transcription">
+    Follow Zoom's guide: [Enabling or disabling audio transcription for cloud recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065911)
+  </Accordion>
+  
+  <Accordion title="Using Audio Transcription">
+    Learn more: [Using audio transcription for cloud recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064927)
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Meetings aren't appearing in Objectionly">
+    If your meetings aren't showing up, check these common issues:
+    
+    1. **Cloud Recording**: Verify meetings are recorded to the cloud, not locally
+    2. **Transcription Settings**: Confirm audio transcription is enabled
+    3. **Processing Status**: Check that recordings have finished processing in Zoom
+    4. **Plan Status**: Ensure your Objectionly billing plan is active
+    
+    If issues persist, contact our support team.
+  </Accordion>
+  
+  <Accordion title="Transcripts are missing or incomplete">
+    This usually happens when:
+    
+    - The meeting wasn't recorded to the cloud
+    - Transcription was disabled in Zoom settings
+    - The meeting is still processing (allow up to 2x meeting duration)
+    
+    Check your Zoom cloud recording settings and try again.
+  </Accordion>
+</AccordionGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="View Your Analytics" icon="chart-line" href="https://app.objectionly.com/dashboard">
+    Access your dashboard to view AI-powered insights from your Zoom meetings.
+  </Card>
+  
+  <Card title="Explore Other Integrations" icon="puzzle-piece" href="https://app.objectionly.com/dashboard/integrations">
+    Connect additional platforms like Fireflies and Fathom for comprehensive coverage.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Pro tip: Enable notifications in your Objectionly settings to get alerts when new meeting analyses are ready!
+</Tip>

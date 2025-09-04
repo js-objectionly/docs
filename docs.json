@@ -1,97 +1,92 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Objectionly",
-  "modeToggle": {
-    "default": "light"
-  },
-  "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
-  },
-  "favicon": "/favicon.svg",
-  "navigation": {
-    "tabs": [
-      {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "Getting started",
-            "pages": [
-              "introduction"
-            ]
-          },
-          {
-            "group": "Integrations",
-            "pages": [
-              "integrations/zoom",
-              "integrations/fireflies",
-              "integrations/fathom"
-            ]
-          }
+    "$schema": "https://mintlify.com/docs.json",
+    "theme": "mint",
+    "name": "Objectionly",
+    "modeToggle": {
+        "default": "light"
+    },
+    "colors": {
+        "primary": "#16A34A",
+        "light": "#07C983",
+        "dark": "#15803D"
+    },
+    "favicon": "/favicon.svg",
+    "navigation": {
+        "tabs": [{
+                "tab": "Guides",
+                "groups": [{
+                        "group": "Getting started",
+                        "pages": [
+                            "introduction"
+                        ]
+                    },
+                    {
+                        "group": "Integrations",
+                        "pages": [
+                            "integrations/zoom",
+                            "integrations/fireflies",
+                            "integrations/fathom"
+                        ]
+                    }
+                ]
+            },
+            {
+                "tab": "API reference",
+                "groups": [{
+                        "group": "API documentation",
+                        "pages": [
+                            "api-reference/introduction"
+                        ]
+                    },
+                    {
+                        "group": "Endpoint examples",
+                        "pages": [
+                            "api-reference/endpoint/get",
+                            "api-reference/endpoint/create",
+                            "api-reference/endpoint/delete",
+                            "api-reference/endpoint/get-sales-rep",
+                            "api-reference/endpoint/create-sales-rep",
+                            "api-reference/endpoint/update-sales-rep",
+                            "api-reference/endpoint/delete-sales-rep",
+                            "api-reference/endpoint/webhook"
+                        ]
+                    }
+                ]
+            }
         ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/get-sales-rep",
-              "api-reference/endpoint/create-sales-rep",
-              "api-reference/endpoint/update-sales-rep",
-              "api-reference/endpoint/delete-sales-rep",
-              "api-reference/endpoint/webhook"
-            ]
-          }
+    },
+    "logo": {
+        "light": "/logo/android-chrome-512x512.png",
+        "dark": "/logo/android-chrome-512x512.png"
+    },
+    "navbar": {
+        "links": [{
+            "label": "Support",
+            "href": "mailto:jack@conversioniq.co"
+        }],
+        "primary": {
+            "type": "button",
+            "label": "Dashboard",
+            "href": "https://app.objectionly.com"
+        }
+    },
+    "contextual": {
+        "options": [
+            "copy",
+            "view",
+            "chatgpt",
+            "claude",
+            "perplexity",
+            "mcp",
+            "cursor",
+            "vscode"
         ]
-      }
-    ]
-  },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:jack@conversioniq.co"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.conversioniq.co"
+    },
+    "footer": {
+        "socials": {
+            "x": "https://x.com/conversioniq",
+            "github": "https://github.com/conversioniq",
+            "linkedin": "https://linkedin.com/company/conversioniq"
+        }
     }
-  },
-  "contextual": {
-    "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/conversioniq",
-      "github": "https://github.com/conversioniq",
-      "linkedin": "https://linkedin.com/company/conversioniq"
-    }
-  }
 }
