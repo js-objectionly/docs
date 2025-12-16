@@ -1,0 +1,104 @@
+---
+title: "Zapier API"
+description: "Endpoints used by the Objectionly Zapier integration."
+---
+
+## Base URL
+
+`https://app.objectionly.com`
+
+## Authentication
+
+All endpoints use your workspace API key:
+
+- `X-Workspace-API-Key: <your-workspace-api-key>` (required)
+
+To find your workspace API key, open the Objectionly dashboard and go to **Integrations → Zapier**.
+
+## Queue a call transcript
+
+`POST /api/call-processing/queue`
+
+### Headers
+
+- `Content-Type: application/json` (required)
+- `X-Objectionly-Source: zapier` (recommended; helps attribution)
+
+### Request body
+
+```json
+{
+  "title": "Discovery call - Acme",
+  "transcript": "Full transcript text...",
+  "repEmail": "rep@acme.com",
+  "repName": "Alex Rep",
+  "callDate": "2025-12-16T18:32:00.000Z",
+  "callDuration": 42,
+  "description": "Optional summary or metadata...",
+  "externalMeetingId": "optional-idempotency-key"
+}
+```
+
+### Fields
+
+- `title` (string, required): Call title.
+- `transcript` (string, required): Transcript text.
+- `repEmail` (string, required): Rep/host email.
+- `callDate` (string, required): ISO-8601 timestamp (e.g. `2025-12-16T18:32:00.000Z`).
+- `repName` (string, optional): Rep/host display name.
+- `callDuration` (number, optional): Duration in minutes. Defaults to 30 if omitted.
+- `description` (string, optional): Any additional context you want stored with the call.
+- `externalMeetingId` (string, optional): Used for de-duplication/idempotency. If you send the same value again for the same workspace, you’ll receive the existing `callId` instead of creating a new call.
+
+### Responses
+
+#### 200 OK (queued)
+
+```json
+{
+  "callId": "uuid",
+  "status": "queued",
+  "queued": true
+}
+```
+
+#### 200 OK (duplicate)
+
+If `externalMeetingId` matches an existing call in the same workspace:
+
+```json
+{
+  "callId": "uuid",
+  "status": "queued",
+  "duplicate": true
+}
+```
+
+Notes:
+
+- In the duplicate case, `status` is the existing call’s current status.
+
+#### Errors
+
+- `400` Missing/invalid headers or JSON, or invalid request fields
+- `404` Invalid workspace API key
+- `500` Failed to queue call
+
+## Validate your API key (Zapier auth test)
+
+`GET /api/call-processing/queue?ping=1`
+
+Requires `X-Workspace-API-Key`. Returns workspace metadata if the key is valid.
+
+### 200 OK
+
+```json
+{
+  "workspaceId": "uuid",
+  "orgName": "Acme (optional)",
+  "hasActivePlan": true,
+  "currentPlan": "pro",
+  "salesCallsRemaining": 123,
+  "message": "Workspace API key validated"
+}
+```

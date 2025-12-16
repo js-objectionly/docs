@@ -35,20 +35,8 @@
                 "groups": [{
                         "group": "API documentation",
                         "pages": [
-                            "api-reference/introduction"
-                        ]
-                    },
-                    {
-                        "group": "Endpoint examples",
-                        "pages": [
-                            "api-reference/endpoint/get",
-                            "api-reference/endpoint/create",
-                            "api-reference/endpoint/delete",
-                            "api-reference/endpoint/get-sales-rep",
-                            "api-reference/endpoint/create-sales-rep",
-                            "api-reference/endpoint/update-sales-rep",
-                            "api-reference/endpoint/delete-sales-rep",
-                            "api-reference/endpoint/webhook"
+                            "api-reference/introduction",
+                            "api-reference/queue-call-processing"
                         ]
                     }
                 ]
