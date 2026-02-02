@@ -6,26 +6,26 @@
         "default": "light"
     },
     "colors": {
-        "primary": "#16A34A",
-        "light": "#07C983",
-        "dark": "#15803D"
+        "primary": "#002C72",
+        "light": "#2B7FFF",
+        "dark": "#155DFC"
     },
-    "favicon": "/favicon.svg",
+    "favicon": "/favicon-2.png",
     "navigation": {
         "tabs": [{
                 "tab": "Guides",
                 "groups": [{
                         "group": "Getting started",
                         "pages": [
-                            "introduction"
+                            "index"
                         ]
                     },
                     {
                         "group": "Integrations",
                         "pages": [
                             "integrations/zoom",
-                            "integrations/fireflies",
-                            "integrations/fathom"
+                            "integrations/fathom",
+                            "integrations/fireflies"
                         ]
                     }
                 ]
@@ -33,16 +33,19 @@
             {
                 "tab": "API reference",
                 "groups": [{
-                        "group": "API documentation",
-                        "pages": [
-                            "api-reference/introduction",
-                            "api-reference/queue-call-processing"
-                        ]
-                    }
-                ]
+                    "group": "API documentation",
+                    "pages": [
+                        "api-reference/introduction",
+                        "api-reference/queue-call-processing"
+                    ]
+                }]
             }
         ]
     },
+    "redirects": [{
+        "source": "/introduction",
+        "destination": "/"
+    }],
     "logo": {
         "light": "/logo/android-chrome-512x512.png",
         "dark": "/logo/android-chrome-512x512.png"
@@ -50,7 +53,7 @@
     "navbar": {
         "links": [{
             "label": "Support",
-            "href": "mailto:jack@conversioniq.co"
+            "href": "mailto:team@objectionly.com"
         }],
         "primary": {
             "type": "button",
@@ -74,7 +77,7 @@
         "socials": {
             "x": "https://x.com/conversioniq",
             "github": "https://github.com/conversioniq",
-            "linkedin": "https://linkedin.com/company/conversioniq"
+            "linkedin": "https://www.linkedin.com/company/objectionly/"
         }
     }
 }

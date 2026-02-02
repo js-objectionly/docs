@@ -1,104 +1,166 @@
 ---
-title: "Zapier API"
-description: "Endpoints used by the Objectionly Zapier integration."
+title: "Queue Call"
+description: "Queue call transcripts or audio files for processing."
+api: "POST https://api.objectionly.com/api/call-processing/queue"
 ---
 
 ## Base URL
 
-`https://app.objectionly.com`
+[https://api.objectionly.com](https://api.objectionly.com)
 
-## Authentication
-
-All endpoints use your workspace API key:
-
-- `X-Workspace-API-Key: <your-workspace-api-key>` (required)
-
-To find your workspace API key, open the Objectionly dashboard and go to **Integrations → Zapier**.
-
-## Queue a call transcript
+## Endpoint
 
 `POST /api/call-processing/queue`
 
-### Headers
+## Authentication
 
-- `Content-Type: application/json` (required)
-- `X-Objectionly-Source: zapier` (recommended; helps attribution)
+<Note>
+  Request your workspace API key via the
+  [API key request form](https://docs.google.com/forms/d/e/1FAIpQLSeWq6YmZSFyKS_wIO_enSdDiMygH22HUIjR2Atu3A0D4aGH1g/viewform).
+</Note>
 
-### Request body
+<ParamField header="X-Workspace-API-Key" type="string" required>
+  Your workspace API key.
+</ParamField>
 
-```json
-{
-  "title": "Discovery call - Acme",
-  "transcript": "Full transcript text...",
-  "repEmail": "rep@acme.com",
-  "repName": "Alex Rep",
-  "callDate": "2025-12-16T18:32:00.000Z",
-  "callDuration": 42,
-  "description": "Optional summary or metadata...",
-  "externalMeetingId": "optional-idempotency-key"
-}
-```
+## Headers
 
-### Fields
+<ParamField header="Content-Type" type="string" required default="application/json">
+  Use `application/json` for transcript payloads or `multipart/form-data` for
+  audio uploads.
+</ParamField>
 
-- `title` (string, required): Call title.
-- `transcript` (string, required): Transcript text.
-- `repEmail` (string, required): Rep/host email.
-- `callDate` (string, required): ISO-8601 timestamp (e.g. `2025-12-16T18:32:00.000Z`).
-- `repName` (string, optional): Rep/host display name.
-- `callDuration` (number, optional): Duration in minutes. Defaults to 30 if omitted.
-- `description` (string, optional): Any additional context you want stored with the call.
-- `externalMeetingId` (string, optional): Used for de-duplication/idempotency. If you send the same value again for the same workspace, you’ll receive the existing `callId` instead of creating a new call.
+## Request body
 
-### Responses
+<ParamField body="title" type="string" required default="Discovery call - Acme">
+  Call title.
+</ParamField>
 
-#### 200 OK (queued)
+<ParamField body="transcript" type="string" required default="Full transcript text...">
+  Full transcript text.
+</ParamField>
 
-```json
-{
-  "callId": "uuid",
-  "status": "queued",
-  "queued": true
-}
-```
+<ParamField body="repEmail" type="string" required default="rep@acme.com">
+  Rep or host email (must be valid).
+</ParamField>
 
-#### 200 OK (duplicate)
+<ParamField body="callDate" type="string" required default="2025-12-16T18:32:00.000Z">
+  ISO-8601 timestamp (e.g. `2025-12-16T18:32:00.000Z`).
+</ParamField>
 
-If `externalMeetingId` matches an existing call in the same workspace:
+<ParamField body="file" type="string">
+  Audio file (multipart only). Required if `transcript` is omitted.
+</ParamField>
 
-```json
-{
-  "callId": "uuid",
-  "status": "queued",
-  "duplicate": true
-}
-```
+<ParamField body="repName" type="string">
+  Rep or host display name.
+</ParamField>
 
-Notes:
+<ParamField body="callDuration" type="number">
+  Duration in minutes. Defaults to 30 if omitted.
+</ParamField>
 
-- In the duplicate case, `status` is the existing call’s current status.
+<ParamField body="description" type="string">
+  Additional context to store with the call.
+</ParamField>
 
-#### Errors
+<ParamField body="externalMeetingId" type="string">
+  Used for de-duplication/idempotency across calls.
+</ParamField>
 
-- `400` Missing/invalid headers or JSON, or invalid request fields
-- `404` Invalid workspace API key
-- `500` Failed to queue call
+<Info>
+  Provide either `transcript` or `file`. When you upload a `file` without a
+  `transcript`, Objectionly will transcribe the audio and queue the call.
+</Info>
 
-## Validate your API key (Zapier auth test)
+<Tabs>
+  <Tab title="Transcript (JSON)">
+    ```json
+    {
+      "title": "Discovery call - Acme",
+      "transcript": "Full transcript text...",
+      "repEmail": "rep@acme.com",
+      "repName": "Alex Rep",
+      "callDate": "2025-12-16T18:32:00.000Z",
+      "callDuration": 42,
+      "description": "Optional summary or metadata...",
+      "externalMeetingId": "optional-idempotency-key"
+    }
+    ```
+  </Tab>
 
-`GET /api/call-processing/queue?ping=1`
+  <Tab title="Audio upload (multipart)">
+    <Info>
+      If you omit `transcript` and provide a `file`, Objectionly will transcribe
+      the audio and queue the call.
+    </Info>
 
-Requires `X-Workspace-API-Key`. Returns workspace metadata if the key is valid.
+    <Note>
+      Supported audio file types: `.wav`, `.mp3`, `.m4a`, `.mp4` (audio/* or
+      video/mp4).
+    </Note>
+  </Tab>
+</Tabs>
 
-### 200 OK
+## Responses
 
-```json
-{
-  "workspaceId": "uuid",
-  "orgName": "Acme (optional)",
-  "hasActivePlan": true,
-  "currentPlan": "pro",
-  "salesCallsRemaining": 123,
-  "message": "Workspace API key validated"
-}
-```
+<Tabs>
+  <Tab title="Queued (200)">
+    <ResponseField name="callId" type="string" required>
+      Unique identifier for the queued call.
+    </ResponseField>
+
+    <ResponseField name="status" type="string" required>
+      Queue status for the call.
+    </ResponseField>
+
+    <ResponseField name="queued" type="boolean" required>
+      Indicates the call was queued successfully.
+    </ResponseField>
+
+    ```json
+    {
+      "callId": "uuid",
+      "status": "queued",
+      "queued": true
+    }
+    ```
+  </Tab>
+
+  <Tab title="Duplicate (200)">
+    <ResponseField name="callId" type="string" required>
+      Existing call identifier.
+    </ResponseField>
+
+    <ResponseField name="status" type="string" required>
+      Current status of the existing call.
+    </ResponseField>
+
+    <ResponseField name="duplicate" type="boolean" required>
+      Returned when `externalMeetingId` matches an existing call.
+    </ResponseField>
+
+    ```json
+    {
+      "callId": "uuid",
+      "status": "queued",
+      "duplicate": true
+    }
+    ```
+
+    <Note>
+      In the duplicate case, `status` is the existing call's current status.
+    </Note>
+  </Tab>
+</Tabs>
+
+## Errors
+
+| Status | Description |
+| --- | --- |
+| 400 | Missing or invalid headers or payload, or invalid request fields |
+| 404 | Invalid workspace API key |
+| 413 | Audio exceeds the maximum supported length |
+| 415 | Unsupported audio file type |
+| 422 | No transcript provided or generated |
+| 500 | Failed to queue call |

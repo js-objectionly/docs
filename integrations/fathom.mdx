@@ -1,12 +1,61 @@
 ---
 title: Fathom
-description: Connect your Fathom account to Objectionly
+description: Connect Fathom to Objectionly to import call transcripts.
 ---
 
-<Note>
-Documentation is coming soon.
-</Note>
+<Card title="What You'll Need">
+- An active Objectionly account
+- A Fathom account with access to API keys
+</Card>
 
-# Fathom
+## Connect Fathom
 
-Integrate Fathom with Objectionly to automatically import your call recordings and leverage our advanced analytics.
+<Steps>
+  <Step title="Open Integrations in Objectionly">
+    Go to the
+    [Objectionly integrations page](https://app.objectionly.com/dashboard/integrations).
+
+    
+  </Step>
+
+  <Step title="Click Connect on Fathom">
+    Find the Fathom card and click **Connect**.
+
+    <img
+      src="/images/integrations/fathom/fathom-step-2-connect.svg"
+      alt="Fathom integration card with Connect button"
+    />
+  </Step>
+
+  <Step title="Create a Fathom API key">
+    Open the [Fathom API keys page](https://fathom.video/api_clients/new) and
+    create a new API key.
+    We recommend naming it **Objectionly API key**.
+
+    <img
+      src="/images/integrations/fathom/fathom-step-3-api-client.svg"
+      alt="Fathom create API key form"
+    />
+  </Step>
+
+  <Step title="Paste the key and connect">
+    Copy the API key, paste it into the Objectionly input, and click
+    **Connect to Fathom**.
+
+    <img
+      src="/images/integrations/fathom/fathom-step-4-paste-key.svg"
+      alt="Objectionly Fathom API key input"
+    />
+  </Step>
+</Steps>
+
+## What happens next
+
+<CardGroup cols={2}>
+  <Card title="Automatic sync" icon="bolt">
+    New Fathom meetings will automatically sync to Objectionly for processing.
+  </Card>
+  <Card title="Import past meetings" icon="download">
+    Use **Import Previous Meetings** to bring in historical calls on demand.
+  </Card>
+</CardGroup>

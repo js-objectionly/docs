@@ -1,10 +1,32 @@
 ---
-title: 'API Reference'
-description: 'Objectionly API documentation for Zapier'
+title: "API Reference"
+description: "Objectionly Call Processing API documentation"
 ---
 
-## Zapier API
+# Call Processing API
 
-Objectionly currently supports a single public endpoint designed for Zapier actions: queueing a call (title + transcript) for processing.
+Use the Objectionly Call Processing API to queue calls for processing with a
+transcript or audio file.
 
-To find your workspace API key, open the Objectionly dashboard and go to **Integrations → Zapier**.
+<Note>
+  Request your workspace API key via the
+  [API key request form](https://docs.google.com/forms/d/e/1FAIpQLSeWq6YmZSFyKS_wIO_enSdDiMygH22HUIjR2Atu3A0D4aGH1g/viewform).
+</Note>
+
+## Base URL
+
+[https://api.objectionly.com](https://api.objectionly.com)
+
+## Authentication
+
+<ParamField header="X-Workspace-API-Key" type="string" required>
+  Include your workspace API key with every request.
+</ParamField>
+
+## Endpoint
+
+<CardGroup cols={1}>
+  <Card title="Queue call" icon="send" href="/api-reference/queue-call-processing">
+    Queue a call transcript or audio file for processing.
+  </Card>
+</CardGroup>
