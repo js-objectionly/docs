@@ -1,6 +1,6 @@
 ---
 title: "Queue Call"
-description: "Queue call transcripts or audio files for processing."
+description: "Queue transcript text, uploaded media, or remote audio/video URLs for processing."
 api: "POST https://api.objectionly.com/api/call-processing/queue"
 ---
 
@@ -15,41 +15,49 @@ api: "POST https://api.objectionly.com/api/call-processing/queue"
 ## Authentication
 
 <Note>
-  Request your workspace API key via the
-  [API key request form](https://docs.google.com/forms/d/e/1FAIpQLSeWq6YmZSFyKS_wIO_enSdDiMygH22HUIjR2Atu3A0D4aGH1g/viewform).
+  Get your API key here:
+  [https://app.objectionly.com/dashboard/integrations](https://app.objectionly.com/dashboard/integrations)
 </Note>
 
 <ParamField header="X-Workspace-API-Key" type="string" required>
   Your workspace API key.
 </ParamField>
 
-## Headers
-
-<ParamField header="Content-Type" type="string" required default="application/json">
-  Use `application/json` for transcript payloads or `multipart/form-data` for
-  audio uploads.
+<ParamField header="X-Objectionly-Proxy-Token" type="string">
+  Required only when your workspace is configured to require a proxy token.
 </ParamField>
 
-## Request body
+<ParamField header="X-Objectionly-Source" type="string">
+  Optional source header. Supported values match the `source` body field. If
+  both are sent, the body `source` value takes precedence.
+</ParamField>
+
+## Request Body
 
 <ParamField body="title" type="string" required default="Discovery call - Acme">
   Call title.
 </ParamField>
 
-<ParamField body="transcript" type="string" required default="Full transcript text...">
-  Full transcript text.
-</ParamField>
-
 <ParamField body="repEmail" type="string" required default="rep@acme.com">
-  Rep or host email (must be valid).
+  Rep or host email. Must be a valid email address.
 </ParamField>
 
-<ParamField body="callDate" type="string" required default="2025-12-16T18:32:00.000Z">
-  ISO-8601 timestamp (e.g. `2025-12-16T18:32:00.000Z`).
+<ParamField body="callDate" type="string" required default="2026-01-31T18:30:00Z">
+  ISO-8601 timestamp.
+</ParamField>
+
+<ParamField body="transcriptText" type="string">
+  Plain transcript text. This is the preferred text field for new integrations.
+</ParamField>
+
+<ParamField body="mediaUrl" type="string">
+  Absolute `http(s)` URL for a remote audio or video file. Can be used by
+  itself or together with `transcriptText`.
 </ParamField>
 
 <ParamField body="file" type="string">
-  Audio file (multipart only). Required if `transcript` is omitted.
+  Multipart file upload for direct media ingestion. `file` and `mediaUrl`
+  cannot be sent together.
 </ParamField>
 
 <ParamField body="repName" type="string">
@@ -57,7 +65,7 @@ api: "POST https://api.objectionly.com/api/call-processing/queue"
 </ParamField>
 
 <ParamField body="callDuration" type="number">
-  Duration in minutes. Defaults to 30 if omitted.
+  Duration in minutes. Must be a positive integer. Defaults to `30` if omitted.
 </ParamField>
 
 <ParamField body="description" type="string">
@@ -68,37 +76,84 @@ api: "POST https://api.objectionly.com/api/call-processing/queue"
   Used for de-duplication/idempotency across calls.
 </ParamField>
 
+<ParamField body="source" type="string">
+  Optional source value. Supported values: `manually`, `firefliesai`,
+  `fathom`, `zoom`, `gohighlevel`, `zapier`, `custom_api`.
+</ParamField>
+
+<ParamField body="forceImport" type="boolean">
+  Bypasses early short-call filtering when set to `true`. For manual imports,
+  this defaults to `true` if omitted.
+</ParamField>
+
 <Info>
-  Provide either `transcript` or `file`. When you upload a `file` without a
-  `transcript`, Objectionly will transcribe the audio and queue the call.
+  Provide at least one ingest input: `transcriptText`, `mediaUrl`, or `file`.
 </Info>
 
+<Note>
+  Media-only requests are accepted. When you upload a `file` or provide a
+  `mediaUrl` without transcript text, Objectionly stores the media and
+  transcribes it later during processing.
+</Note>
+
+<Note>
+  Supported media types are `.mp3`, `.wav`, `.m4a`, and `.mp4`, mapped to
+  `audio/mpeg`, `audio/wav`, `audio/m4a`, and `video/mp4`.
+</Note>
+
+## Examples
+
 <Tabs>
-  <Tab title="Transcript (JSON)">
+  <Tab title="Transcript text (JSON)">
     ```json
     {
       "title": "Discovery call - Acme",
-      "transcript": "Full transcript text...",
+      "transcriptText": "Full transcript text...",
       "repEmail": "rep@acme.com",
       "repName": "Alex Rep",
-      "callDate": "2025-12-16T18:32:00.000Z",
+      "callDate": "2026-01-31T18:30:00Z",
       "callDuration": 42,
       "description": "Optional summary or metadata...",
-      "externalMeetingId": "optional-idempotency-key"
+      "externalMeetingId": "optional-idempotency-key",
+      "source": "custom_api"
     }
     ```
   </Tab>
 
-  <Tab title="Audio upload (multipart)">
-    <Info>
-      If you omit `transcript` and provide a `file`, Objectionly will transcribe
-      the audio and queue the call.
-    </Info>
+  <Tab title="Remote media URL (JSON)">
+    ```json
+    {
+      "title": "Remote recording",
+      "mediaUrl": "https://cdn.example.com/calls/discovery-call.mp4",
+      "repEmail": "rep@acme.com",
+      "repName": "Alex Rep",
+      "callDate": "2026-01-31T18:30:00Z",
+      "callDuration": 42,
+      "source": "custom_api"
+    }
+    ```
+  </Tab>
 
-    <Note>
-      Supported audio file types: `.wav`, `.mp3`, `.m4a`, `.mp4` (audio/* or
-      video/mp4).
-    </Note>
+  <Tab title="Transcript + media URL (JSON)">
+    ```json
+    {
+      "title": "Remote recording with transcript",
+      "transcriptText": "Transcript already captured by the upstream system.",
+      "mediaUrl": "https://cdn.example.com/calls/discovery-call.mp3",
+      "repEmail": "rep@acme.com",
+      "repName": "Alex Rep",
+      "callDate": "2026-01-31T18:30:00Z",
+      "source": "firefliesai"
+    }
+    ```
+  </Tab>
+
+  <Tab title="File upload (multipart)">
+    Send a `multipart/form-data` request with form fields like `title`,
+    `repEmail`, `callDate`, optional `transcriptText`, and a `file` part.
+
+    Do not manually set the multipart `Content-Type` header; your HTTP client
+    should generate it with the boundary.
   </Tab>
 </Tabs>
 
@@ -123,6 +178,29 @@ api: "POST https://api.objectionly.com/api/call-processing/queue"
       "callId": "uuid",
       "status": "queued",
       "queued": true
+    }
+    ```
+  </Tab>
+
+  <Tab title="Filtered Out (200)">
+    <ResponseField name="callId" type="string" required>
+      Unique identifier for the call record.
+    </ResponseField>
+
+    <ResponseField name="status" type="string" required>
+      `filtered_out` when the call is stopped during ingest, such as for a
+      short call.
+    </ResponseField>
+
+    <ResponseField name="queued" type="boolean" required>
+      `false` when the call was stored but not queued for worker processing.
+    </ResponseField>
+
+    ```json
+    {
+      "callId": "uuid",
+      "status": "filtered_out",
+      "queued": false
     }
     ```
   </Tab>
@@ -154,13 +232,22 @@ api: "POST https://api.objectionly.com/api/call-processing/queue"
   </Tab>
 </Tabs>
 
+## Remote Media URL Rules
+
+- `mediaUrl` must be an absolute `http(s)` URL.
+- In production, `mediaUrl` must use `https`.
+- The URL must resolve to a public internet address.
+- Redirects are allowed, but only up to the configured limit.
+- Maximum media size is 500 MB.
+- Unsupported media types return `415 Unsupported Media Type`.
+
 ## Errors
 
 | Status | Description |
 | --- | --- |
-| 400 | Missing or invalid headers or payload, or invalid request fields |
-| 404 | Invalid workspace API key |
-| 413 | Audio exceeds the maximum supported length |
-| 415 | Unsupported audio file type |
-| 422 | No transcript provided or generated |
-| 500 | Failed to queue call |
+| 400 | Missing or invalid fields such as `title`, `repEmail`, `callDate`, `callDuration`, `forceImport`, `source`, malformed `mediaUrl`, or sending `file` and `mediaUrl` together |
+| 401 | Missing or invalid authentication |
+| 413 | Uploaded or remote media exceeds the 500 MB limit |
+| 415 | Unsupported media type |
+| 422 | `mediaUrl` could not be fetched or failed remote URL safety checks |
+| 500 | Failed to store media or queue the call |

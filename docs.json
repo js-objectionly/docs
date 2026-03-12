@@ -25,7 +25,9 @@
                         "pages": [
                             "integrations/zoom",
                             "integrations/fathom",
-                            "integrations/fireflies"
+                            "integrations/fireflies",
+                            "integrations/leadconnector",
+                            "integrations/zapier"
                         ]
                     }
                 ]

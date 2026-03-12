@@ -5,12 +5,15 @@ description: "Objectionly Call Processing API documentation"
 
 # Call Processing API
 
-Use the Objectionly Call Processing API to queue calls for processing with a
-transcript or audio file.
+Use the Objectionly Call Processing API to queue calls for processing with:
+
+- transcript text
+- uploaded audio or video files
+- remote audio or video URLs
 
 <Note>
-  Request your workspace API key via the
-  [API key request form](https://docs.google.com/forms/d/e/1FAIpQLSeWq6YmZSFyKS_wIO_enSdDiMygH22HUIjR2Atu3A0D4aGH1g/viewform).
+  Get your API key here:
+  [https://app.objectionly.com/dashboard/integrations](https://app.objectionly.com/dashboard/integrations)
 </Note>
 
 ## Base URL
@@ -20,13 +23,18 @@ transcript or audio file.
 ## Authentication
 
 <ParamField header="X-Workspace-API-Key" type="string" required>
-  Include your workspace API key with every request.
+  Include your workspace API key with server-to-server requests.
+</ParamField>
+
+<ParamField header="X-Objectionly-Proxy-Token" type="string">
+  Required only when your workspace is configured to require a proxy token.
 </ParamField>
 
 ## Endpoint
 
 <CardGroup cols={1}>
   <Card title="Queue call" icon="send" href="/api-reference/queue-call-processing">
-    Queue a call transcript or audio file for processing.
+    Queue transcript text, uploaded media, or remote audio/video URLs for
+    processing.
   </Card>
 </CardGroup>
