@@ -1,0 +1,84 @@
+---
+title: Close CRM
+description: Set up the Close CRM integration and Zapier template for Objectionly.
+---
+
+<Card title="What You'll Need">
+- An active Objectionly account
+- Access to your Close CRM workspace
+- Permission to view Close CRM user details
+- A Zapier account
+</Card>
+
+## Close CRM Setup
+
+<Steps>
+  <Step title="Get rep user IDs from Close CRM and use them as rep unique IDs">
+    Follow Close's guide for finding user IDs:
+    [Find IDs in Close](https://help.close.com/docs/find-ids-in-close).
+
+    In Objectionly, open each rep and set that rep's **Unique ID** to the
+    matching Close CRM **User ID**. These user IDs are used to map Close CRM
+    calls to the correct rep in Objectionly.
+  </Step>
+
+  <Step title="Connect Close CRM in Objectionly and import the Zapier template">
+    Go to the
+    [Objectionly integrations page](https://app.objectionly.com/dashboard/integrations),
+    click **Connect to Close CRM**, and import the Zapier template.
+  </Step>
+
+  <Step title="Configure the Zapier template">
+    The Zapier template has three sections:
+
+    **1. Close trigger**
+
+    Use the trigger event **New Call Recording**.
+
+    **2. Formatting code block**
+
+    Use the action event **Run Python** and add an input data field named
+    `seconds_duration` mapped to Close CRM's **Recording Duration** value.
+
+    <pre><code className="language-python">{[
+      "import math",
+      "",
+      "# Get the seconds duration from input data and convert it to an integer",
+      "seconds_duration = int(input_data.get('seconds_duration', '0'))",
+      "",
+      "# Convert seconds to minutes, rounding up to the nearest minute if less than 1 minute",
+      "minutes_duration = math.ceil(seconds_duration / 60)",
+      "",
+      "# Return the result as an object",
+      "return {'minutes_duration': minutes_duration}",
+    ].join("\n")}</code></pre>
+
+    **3. Upload Call Transcript for Objectionly**
+
+    Map the Objectionly fields using the values below.
+
+    Configure the **Upload Call Transcript** action with these values:
+
+    - **Call title**: `Direction` + `Phone`
+    - **Transcript**: `Expiring Audio Url`
+    - **Rep email**: `User Id`
+    - **Rep name**: `User Id`
+    - **Call date**: `Date Answered`
+    - **Call duration (minutes)**: `Minutes Duration`
+    - **Description / summary**: optional
+    - **External meeting reference**: `ID`
+  </Step>
+</Steps>
+
+## Why this matters
+
+<CardGroup cols={2}>
+  <Card title="Accurate rep mapping" icon="users">
+    Matching Close CRM user IDs to Objectionly rep unique IDs ensures calls are
+    assigned to the right person.
+  </Card>
+  <Card title="Correct duration values" icon="clock">
+    The Python step converts Close CRM recording duration from seconds into the
+    minutes value required by Objectionly.
+  </Card>
+</CardGroup>
