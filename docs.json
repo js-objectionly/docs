@@ -24,6 +24,7 @@
                         "group": "Integrations",
                         "pages": [
                             "integrations/close-crm",
+                            "integrations/quo",
                             "integrations/zoom",
                             "integrations/fathom",
                             "integrations/fireflies",
