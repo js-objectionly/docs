@@ -1,0 +1,54 @@
+---
+title: RingCentral
+description: Set up the RingCentral Zapier workflow to send ACE processed recordings into Objectionly.
+---
+
+<Card title="What You'll Need">
+- An active Objectionly account
+- Access to your RingCentral account and ACE processed recordings
+- A Zapier account
+</Card>
+
+## RingCentral Setup
+
+<Steps>
+  <Step title="Import the Zapier template and configure the RingCentral trigger">
+    Use the
+    [RingCentral Zapier template](https://zapier.com/shared/71f82521e061edada4afcf631351d25077905c15)
+    to create the Zap.
+
+    For the first step, choose RingCentral and set the trigger event to
+    **ACE Processed Recording**.
+
+    In the **Config** tab, set **Duration Unit** to **Minutes**.
+  </Step>
+
+  <Step title="Send the RingCentral recording to Objectionly">
+    For the second step, in the **Setup** tab choose the action event
+    **Upload Call Transcript**.
+
+    In the **Config** tab, map the fields like this:
+
+    - **Call title**: `Title`
+    - **Transcript**: `ACE URI`
+    - **Rep email**: `Host Phone Number`
+    - **Rep name**: `Host Phone Number`
+    - **Call date**: `Recording Start Time`
+    - **Call duration (minutes)**: `Recording Duration`
+    - **Description / summary**: optional
+    - **External meeting reference**: `ID`
+  </Step>
+</Steps>
+
+## Why this matters
+
+<CardGroup cols={2}>
+  <Card title="No custom formatter needed" icon="wand-magic-sparkles">
+    RingCentral can provide the duration in minutes directly, so this Zap works
+    without adding a separate code or formatter step.
+  </Card>
+  <Card title="Stable call matching" icon="link">
+    Passing the RingCentral **ID** as the external meeting reference helps
+    Objectionly avoid duplicate call imports.
+  </Card>
+</CardGroup>

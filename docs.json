@@ -28,6 +28,7 @@
                             "integrations/zoom",
                             "integrations/fathom",
                             "integrations/fireflies",
+                            "integrations/ringcentral",
                             "integrations/leadconnector",
                             "integrations/zapier"
                         ]
