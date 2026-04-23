@@ -1,0 +1,53 @@
+---
+title: JustCall
+description: Set up the JustCall Zapier workflow to send completed call recordings into Objectionly.
+---
+
+<Card title="What You'll Need">
+- An active Objectionly account
+- Access to your JustCall account and completed call recordings
+- A Zapier account
+</Card>
+
+## JustCall Setup
+
+<Steps>
+  <Step title="Import the Zapier template and configure the JustCall trigger">
+    Use the
+    [JustCall Zapier template](https://zapier.com/templates/details/upload-justcall-recordings-to-objectionly-df8c85?secret=MTp0ZW1wbGF0ZTpzZzZzbjhYdjBKcjFMZl9VY0lCNHN3b1JnNzVfNk5hZ0ZiSkNMeTlsR0dNOmo5YTdxdg)
+    to create the Zap.
+
+    For the first step, choose JustCall and set the trigger event to
+    **Call Completed** or **Call Completed (Sales Dialer)**.
+  </Step>
+
+  <Step title="Send the JustCall recording to Objectionly">
+    For the second step, in the **Setup** tab choose the action event
+    **Upload Call Transcript**.
+
+    In the **Config** tab, map the fields like this:
+
+    - **Call title**: `Contact name ( {Contact Number} )`
+    - **Transcript**: `Call Info Recording`
+    - **Rep email**: `Agent Email`
+    - **Rep name**: `Agent Name`
+    - **Call date**: `Call Date`
+    - **Call duration (minutes)**: `Call Duration Total Duration`
+    - **Description / summary**: leave empty
+    - **External meeting reference**: `Id`
+  </Step>
+</Steps>
+
+## Why this matters
+
+<CardGroup cols={2}>
+  <Card title="Two supported triggers" icon="bolt">
+    Use **Call Completed** for standard JustCall calls or
+    **Call Completed (Sales Dialer)** when the recording comes from Sales
+    Dialer activity.
+  </Card>
+  <Card title="Stable call matching" icon="link">
+    Passing the JustCall **Id** as the external meeting reference helps
+    Objectionly avoid duplicate call imports.
+  </Card>
+</CardGroup>

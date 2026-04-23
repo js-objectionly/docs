@@ -29,6 +29,7 @@
                             "integrations/fathom",
                             "integrations/fireflies",
                             "integrations/ringcentral",
+                            "integrations/justcall",
                             "integrations/leadconnector",
                             "integrations/zapier"
                         ]
