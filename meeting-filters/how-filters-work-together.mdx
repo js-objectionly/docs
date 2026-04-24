@@ -1,0 +1,49 @@
+---
+title: How Filters Work Together
+description: Understand the order Objectionly uses when it decides whether to process a call.
+---
+
+When a call comes in, Objectionly runs it through filters in a specific order. Understanding this order helps when troubleshooting unexpected results.
+
+## Filter order
+
+<Steps titleSize="h3">
+  <Step title="Manual uploads and allowed calls">
+    These skip all filters.
+  </Step>
+  <Step title="Duration check">
+    Very short calls are filtered before any processing.
+  </Step>
+  <Step title="Rep check">
+    If rep filtering is on and the host is not a known rep, the call is filtered.
+  </Step>
+  <Step title="Title check">
+    If you have title filters, the call's title must match at least one.
+  </Step>
+  <Step title="Processing">
+    Calls that pass all filters continue to transcription, scoring, and reporting.
+  </Step>
+</Steps>
+
+## What bypasses filters
+
+Some calls always skip filters:
+
+- **Manual call uploads** - any call you upload directly will be processed.
+- **Allowed calls** - when you allow a call from Filtered Out Calls, filters are skipped for that call.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Why was a call filtered unexpectedly?">
+    - **Duration filter triggered:** Objectionly may update the call duration after transcription, so a call that seemed long enough up front might be shorter once the recording is analyzed.
+    - **Rep filter triggered:** The host email on the meeting does not match any rep's email or saved identifier.
+    - **Title filter triggered:** None of your title filters appear anywhere in the meeting title.
+  </Accordion>
+  <Accordion title="Why did a call process unexpectedly?">
+    - The call was uploaded manually.
+    - The call was previously allowed from Filtered Out Calls.
+    - No title filters are set, so all titles are allowed.
+    - Rep filtering is off, so new reps are created automatically.
+  </Accordion>
+</AccordionGroup>

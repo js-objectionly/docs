@@ -1,0 +1,55 @@
+---
+title: Duration Filter
+description: Set the minimum call length Objectionly should process.
+---
+
+<Callout icon="user-shield">
+  **Who can do this:** Admins
+</Callout>
+
+The Duration Filter sets the minimum call length Objectionly will process. Calls at or below that length are filtered out.
+
+**Default minimum:** 3 minutes
+
+## How it works
+
+- Any call **at or below** the minimum is filtered out. For example, if the minimum is 5, a 5-minute call is also filtered.
+- Calls longer than **8 hours** are filtered out automatically.
+- The minimum must be at least **1 minute**.
+
+<Info>
+  **Duration threshold**
+
+  Calls at or below your minimum are filtered. Calls above the minimum continue
+  to processing unless another filter blocks them.
+</Info>
+
+## Change the duration filter
+
+<Steps>
+  <Step title="Go to the Meeting Filters page">
+    <a href="https://app.objectionly.com/dashboard/settings/meeting-filters" className="inline-flex items-center rounded-lg bg-blue-600 px-3 py-2 text-sm font-medium text-white no-underline hover:bg-blue-700" style={{ color: "#FFFFFF" }}>Open Meeting Filters page</a>
+  </Step>
+  <Step title="Find Duration Filtering">
+    Open the **Duration Filtering** area.
+  </Step>
+  <Step title="Enter the minimum">
+    Enter the minimum number of minutes.
+  </Step>
+  <Step title="Save the change">
+    Select **Save**.
+  </Step>
+</Steps>
+
+## Recommended settings
+
+| Use case | Suggested minimum |
+| --- | --- |
+| Capture almost everything | 1-2 minutes |
+| Ignore quick or noisy calls | 3 minutes |
+| Only process serious sales calls | 5-10 minutes |
+
+<Info>
+  Short calls that get filtered still show up in [Filtered Out Calls](/meeting-filters/filtered-out-calls),
+  so you can review them and allow any that should have been processed.
+</Info>

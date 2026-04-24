@@ -52,6 +52,18 @@
                         ]
                     },
                     {
+                        "group": "Meeting Filters",
+                        "pages": [
+                            "meeting-filters/overview",
+                            "meeting-filters/title-filters",
+                            "meeting-filters/rep-filters",
+                            "meeting-filters/duration-filter",
+                            "meeting-filters/filtered-out-calls",
+                            "meeting-filters/how-filters-work-together",
+                            "meeting-filters/faq"
+                        ]
+                    },
+                    {
                         "group": "Integrations",
                         "pages": [
                             "integrations/close-crm",
