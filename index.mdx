@@ -1,92 +1,33 @@
 ---
 title: Introduction
-description: Welcome to the documentation
+description: Get your Objectionly workspace ready for your sales calls.
 ---
 
 # Welcome to Objectionly
 
-<Info>
-  Get your API key here:
-  [https://app.objectionly.com/dashboard/integrations](https://app.objectionly.com/dashboard/integrations)
-</Info>
+Objectionly helps teams turn sales calls into searchable, coachable workspace data.
+Start by setting up who can access the workspace, which reps should be tracked,
+and which meetings should be imported for analysis.
 
-<CardGroup cols={2}>
-  <Card
-    title="Connect Close CRM"
-    icon="https://www.google.com/s2/favicons?domain=close.com&sz=128"
-    href="/integrations/close-crm"
-  >
-    Map Close CRM reps to Objectionly using Close user IDs.
+<Callout icon="user-shield">
+  Most setup steps require an Admin. Members can view reporting for the reps
+  they have access to.
+</Callout>
+
+## Start here
+
+<CardGroup cols={3}>
+  <Card title="Team & Roles" icon="users" href="/team-and-roles/overview">
+    Invite teammates, add reps, assign roles, and control which rep data each
+    member can see.
   </Card>
-  <Card
-    title="Connect Quo"
-    icon="https://www.google.com/s2/favicons?domain=quo.com&sz=128"
-    href="/integrations/quo"
-  >
-    Send completed Quo call recordings into Objectionly with Zapier.
+  <Card title="Integrations" icon="puzzle-piece" href="#integrations">
+    Connect the tools that send call recordings, transcripts, and rep details
+    into Objectionly.
   </Card>
-  <Card
-    title="Connect Zoom"
-    icon="https://www.google.com/s2/favicons?domain=zoom.com&sz=128"
-    href="/integrations/zoom"
-  >
-    Automatically capture and process Zoom meetings.
-  </Card>
-  <Card
-    title="Connect Fathom"
-    icon="https://www.google.com/s2/favicons?domain=fathom.ai&sz=128"
-    href="/integrations/fathom"
-  >
-    Sync Fathom recordings and transcripts into Objectionly.
-  </Card>
-  <Card
-    title="Connect Fireflies"
-    icon="https://www.google.com/s2/favicons?domain=fireflies.ai&sz=128"
-    href="/integrations/fireflies"
-  >
-    Fireflies AI integration details and setup.
-  </Card>
-  <Card
-    title="Connect RingCentral"
-    icon="https://www.google.com/s2/favicons?domain=ringcentral.com&sz=128"
-    href="/integrations/ringcentral"
-  >
-    Send ACE processed RingCentral recordings into Objectionly with Zapier.
-  </Card>
-  <Card
-    title="Connect JustCall"
-    icon="https://www.google.com/s2/favicons?domain=justcall.io&sz=128"
-    href="/integrations/justcall"
-  >
-    Send completed JustCall recordings into Objectionly with Zapier.
-  </Card>
-  <Card
-    title="Connect LeadConnector"
-    icon="https://www.google.com/s2/favicons?domain=leadconnectorhq.com&sz=128"
-    href="/integrations/leadconnector"
-  >
-    Connect LeadConnector account data into Objectionly.
-  </Card>
-  <Card
-    title="Connect GoHighLevel"
-    icon="https://www.google.com/s2/favicons?domain=gohighlevel.com&sz=128"
-    href="/integrations/gohighlevel"
-  >
-    Connect GoHighLevel account data into Objectionly.
-  </Card>
-  <Card
-    title="Connect Zapier"
-    icon="https://www.google.com/s2/favicons?domain=zapier.com&sz=128"
-    href="/integrations/zapier"
-  >
-    Automate Objectionly workflows through Zapier.
-  </Card>
-  <Card
-    title="API Reference"
-    icon="https://www.google.com/s2/favicons?domain=sordic.io&sz=128"
-    href="/api-reference/introduction"
-  >
-    Queue calls and transcripts for processing.
+  <Card title="Meeting Filters" icon="filter" href="/meeting-filters/overview">
+    Decide which meetings should be processed so reporting stays focused on
+    real sales conversations.
   </Card>
 </CardGroup>
 
@@ -97,12 +38,105 @@ description: Welcome to the documentation
     Go to [app.objectionly.com](https://app.objectionly.com/) to create an
     account or sign in.
   </Step>
-  <Step title="Connect an integration or request an API key">
-    Choose an integration from the list above, or request an API key if you
-    plan to use the API via the
-    [API key request form](https://docs.google.com/forms/d/e/1FAIpQLSeWq6YmZSFyKS_wIO_enSdDiMygH22HUIjR2Atu3A0D4aGH1g/viewform).
+  <Step title="Set up your team">
+    Add the reps whose calls should be tracked, invite workspace members, and
+    assign the right role for each teammate.
   </Step>
-  <Step title="Queue calls for processing">
-    Send call transcripts or audio files and track their status in Objectionly.
+  <Step title="Connect your call source">
+    Choose the integration that matches where your calls live. Objectionly can
+    import calls from conferencing tools, dialers, CRMs, and Zapier workflows.
+  </Step>
+  <Step title="Configure Meeting Filters">
+    Use title, rep, and duration filters to avoid processing internal meetings,
+    test calls, and conversations that are too short to score.
+  </Step>
+  <Step title="Review processed calls">
+    After calls import, use Objectionly to review transcripts, scores, and
+    reporting by rep or team.
   </Step>
 </Steps>
+
+## Core setup areas
+
+<CardGroup cols={2}>
+  <Card title="Understand workspace roles" icon="shield-check" href="/team-and-roles/understanding-roles">
+    Learn the difference between Admins, Members, and Reps before inviting the
+    rest of your team.
+  </Card>
+  <Card title="Manage rep access" icon="eye" href="/team-and-roles/how-rep-access-works">
+    Control whether a Member can see all reps, specific reps, or no rep data.
+  </Card>
+  <Card title="Choose filter rules" icon="filter" href="/meeting-filters/how-filters-work-together">
+    See how title, rep, and duration filters work together before a call is
+    processed.
+  </Card>
+  <Card title="Review filtered calls" icon="circle-check" href="/meeting-filters/filtered-out-calls">
+    Check calls that were skipped and allow any meeting that should be sent
+    back to processing.
+  </Card>
+</CardGroup>
+
+## Integrations
+
+<CardGroup cols={2}>
+  <Card
+    title="Close CRM"
+    icon="https://www.google.com/s2/favicons?domain=close.com&sz=128"
+    href="/integrations/close-crm"
+    horizontal
+  />
+  <Card
+    title="Quo"
+    icon="https://www.google.com/s2/favicons?domain=quo.com&sz=128"
+    href="/integrations/quo"
+    horizontal
+  />
+  <Card
+    title="Zoom"
+    icon="https://www.google.com/s2/favicons?domain=zoom.com&sz=128"
+    href="/integrations/zoom"
+    horizontal
+  />
+  <Card
+    title="Fathom"
+    icon="https://www.google.com/s2/favicons?domain=fathom.ai&sz=128"
+    href="/integrations/fathom"
+    horizontal
+  />
+  <Card
+    title="Fireflies AI"
+    icon="https://www.google.com/s2/favicons?domain=fireflies.ai&sz=128"
+    href="/integrations/fireflies"
+    horizontal
+  />
+  <Card
+    title="RingCentral"
+    icon="https://www.google.com/s2/favicons?domain=ringcentral.com&sz=128"
+    href="/integrations/ringcentral"
+    horizontal
+  />
+  <Card
+    title="JustCall"
+    icon="https://www.google.com/s2/favicons?domain=justcall.io&sz=128"
+    href="/integrations/justcall"
+    horizontal
+  />
+  <Card
+    title="LeadConnector"
+    icon="https://www.google.com/s2/favicons?domain=leadconnectorhq.com&sz=128"
+    href="/integrations/leadconnector"
+    horizontal
+  />
+  <Card
+    title="GoHighLevel"
+    icon="https://www.google.com/s2/favicons?domain=gohighlevel.com&sz=128"
+    href="/integrations/gohighlevel"
+    horizontal
+  />
+  <Card
+    title="Zapier"
+    icon="https://www.google.com/s2/favicons?domain=zapier.com&sz=128"
+    href="/integrations/zapier"
+    horizontal
+  />
+</CardGroup>

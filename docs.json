@@ -28,7 +28,16 @@
                         "pages": [
                             "team-and-roles/overview",
                             "team-and-roles/understanding-roles",
-                            "team-and-roles/managing-reps",
+                            {
+                                "group": "Managing Reps",
+                                "expanded": false,
+                                "pages": [
+                                    "team-and-roles/managing-reps",
+                                    "team-and-roles/add-a-rep",
+                                    "team-and-roles/edit-a-rep",
+                                    "team-and-roles/delete-a-rep"
+                                ]
+                            },
                             {
                                 "group": "Managing Team Members",
                                 "expanded": false,

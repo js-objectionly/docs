@@ -11,17 +11,19 @@ The Duration Filter sets the minimum call length Objectionly will process. Calls
 
 **Default minimum:** 3 minutes
 
+![Duration Filtering settings](/images/Duration%20Filters.png)
+
 ## How it works
 
 - Any call **at or below** the minimum is filtered out. For example, if the minimum is 5, a 5-minute call is also filtered.
-- Calls longer than **8 hours** are filtered out automatically.
+- Calls longer than **8 hours** are filtered out automatically. This long-call safeguard is separate from your minimum duration setting.
 - The minimum must be at least **1 minute**.
 
 <Info>
   **Duration threshold**
 
   Calls at or below your minimum are filtered. Calls above the minimum continue
-  to processing unless another filter blocks them.
+  to processing unless another filter or the 8-hour maximum blocks them.
 </Info>
 
 ## Change the duration filter
