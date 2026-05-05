@@ -82,6 +82,8 @@
                             "integrations/fireflies",
                             "integrations/ringcentral",
                             "integrations/justcall",
+                            "integrations/bluerock",
+                            "integrations/vicidial",
                             "integrations/leadconnector",
                             "integrations/gohighlevel",
                             "integrations/zapier"
