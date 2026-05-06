@@ -1,42 +1,50 @@
 ---
 title: RingCentral
-description: Set up the RingCentral Zapier workflow to send ACE processed recordings into Objectionly.
+description: Set up the RingCentral Zapier workflow to send new call recordings into Objectionly.
 icon: https://www.google.com/s2/favicons?domain=ringcentral.com&sz=128
 ---
 
 <Card title="What You'll Need">
 - An active Objectionly account
-- Access to your RingCentral account and ACE processed recordings
+- Access to your RingCentral account and call recordings
 - A Zapier account
 </Card>
+
+<Info>
+  Ensure call recordings are turned on in RingCentral before setting up this
+  Zap. RingCentral's guide explains how to enable
+  [on-demand or automatic call recording](https://support.ringcentral.com/article-v2/Turning-on-on-demand-or-automatic-call-recording-.html?brand=RingCentral&product=RingEX&language=en_US).
+</Info>
 
 ## RingCentral Setup
 
 <Steps>
   <Step title="Import the Zapier template and configure the RingCentral trigger">
     Use the
-    [RingCentral Zapier template](https://zapier.com/shared/71f82521e061edada4afcf631351d25077905c15)
+    [RingCentral Zapier template](https://zapier.com/templates/details/upload-calls-to-objectionly-from-ringcentral-ddeb16?secret=MTp0ZW1wbGF0ZTp4bUNSeURyVE9GUFlLN1hsUU5mUzRmY1draXJTQmRkRG1oa3haSzdkbGNzOjUzMDlmdA)
     to create the Zap.
 
     For the first step, choose RingCentral and set the trigger event to
-    **ACE Processed Recording**.
+    **New Call Recording**.
 
-    In the **Config** tab, set **Duration Unit** to **Minutes**.
+    In the **Config** tab, use these settings:
+
+    - **Call Log Type**: `Company Call Log`
+    - **Delay By**: `5`
   </Step>
 
   <Step title="Send the RingCentral recording to Objectionly">
-    For the second step, in the **Setup** tab choose the action event
-    **Upload Call Transcript**.
+    In the Objectionly action step, choose the action event **Upload Call
+    Transcript**.
 
     In the **Config** tab, map the fields like this:
 
-    - **Call title**: `Title`
-    - **Transcript**: `ACE URI`
-    - **Rep email**: `Host Phone Number`
-    - **Rep name**: `Host Phone Number`
-    - **Call date**: `Recording Start Time`
-    - **Call duration (minutes)**: `Recording Duration`
-    - **Description / summary**: optional
+    - **Call title**: `To`
+    - **Transcript**: `Recording File`
+    - **Rep email**: `From Phone Number`
+    - **Rep name**: `From Phone Number`
+    - **Call date**: `Start Time`
+    - **Call duration (minutes)**: `Duration Minutes`
     - **External meeting reference**: `ID`
   </Step>
 </Steps>
@@ -44,9 +52,9 @@ icon: https://www.google.com/s2/favicons?domain=ringcentral.com&sz=128
 ## Why this matters
 
 <CardGroup cols={2}>
-  <Card title="No custom formatter needed" icon="wand-magic-sparkles">
-    RingCentral can provide the duration in minutes directly, so this Zap works
-    without adding a separate code or formatter step.
+  <Card title="Recording file import" icon="file-audio">
+    The Zap uses RingCentral's **New Call Recording** event and sends the
+    recording file directly to Objectionly for processing.
   </Card>
   <Card title="Stable call matching" icon="link">
     Passing the RingCentral **ID** as the external meeting reference helps

@@ -73,7 +73,15 @@
                         ]
                     },
                     {
-                        "group": "Integrations",
+                        "group": "Destinations (Data Out)",
+                        "pages": [
+                            "webhooks/webhook",
+                            "webhooks/zapier",
+                            "webhooks/slack"
+                        ]
+                    },
+                    {
+                        "group": "Integrations (Data In)",
                         "pages": [
                             "integrations/close-crm",
                             "integrations/quo",
@@ -82,11 +90,11 @@
                             "integrations/fireflies",
                             "integrations/ringcentral",
                             "integrations/justcall",
-                            "integrations/bluerock",
-                            "integrations/vicidial",
                             "integrations/leadconnector",
                             "integrations/gohighlevel",
-                            "integrations/zapier"
+                            "integrations/zapier",
+                            "integrations/bluerock",
+                            "integrations/vicidial"
                         ]
                     }
                 ]
