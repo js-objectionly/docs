@@ -8,3 +8,24 @@ icon: https://www.google.com/s2/favicons?domain=gohighlevel.com&sz=128
   Documentation is coming soon. You can currently configure this integration
   from the [Objectionly integrations page](https://app.objectionly.com/dashboard/integrations).
 </Note>
+
+## Call Attendees
+
+When Objectionly imports GoHighLevel call recordings, it attempts to attach the
+contact as a call attendee.
+
+If GoHighLevel returns a usable contact phone number, Objectionly sends it to
+the Call Processing API as a phone-only attendee:
+
+```json
+{
+  "attendees": [
+    {
+      "phone": "+15551234567"
+    }
+  ]
+}
+```
+
+If the contact phone is missing or marked as `unknown`, Objectionly omits the
+attendees field for that call.

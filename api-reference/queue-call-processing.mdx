@@ -39,7 +39,8 @@ api: "POST https://api.objectionly.com/api/call-processing/queue"
 </ParamField>
 
 <ParamField body="repEmail" type="string" required default="rep@acme.com">
-  Rep or host email. Must be a valid email address.
+  Rep or host identity. This is usually an email address, but it can also be a
+  unique rep identifier configured in Objectionly.
 </ParamField>
 
 <ParamField body="callDate" type="string" required default="2026-01-31T18:30:00Z">
@@ -86,9 +87,34 @@ api: "POST https://api.objectionly.com/api/call-processing/queue"
   this defaults to `true` if omitted.
 </ParamField>
 
+<ParamField body="attendees" type="array">
+  Optional list of call attendees. Send up to `10` attendee objects.
+</ParamField>
+
+<ParamField body="attendees[].name" type="string">
+  Attendee display name.
+</ParamField>
+
+<ParamField body="attendees[].phone" type="string">
+  Attendee phone number.
+</ParamField>
+
+<ParamField body="attendees[].email" type="string">
+  Attendee email address.
+</ParamField>
+
+<ParamField body="attendees[].uniqueId" type="string">
+  Your upstream identifier for the attendee, such as a CRM contact ID.
+</ParamField>
+
 <Info>
   Provide at least one ingest input: `transcriptText`, `mediaUrl`, or `file`.
 </Info>
+
+<Note>
+  Attendee fields are optional. Objectionly trims attendee values, stores blank
+  values as `null`, and skips attendee objects where every field is blank.
+</Note>
 
 <Note>
   Media-only requests are accepted. When you upload a `file` or provide a
@@ -115,7 +141,15 @@ api: "POST https://api.objectionly.com/api/call-processing/queue"
       "callDuration": 42,
       "description": "Optional summary or metadata...",
       "externalMeetingId": "optional-idempotency-key",
-      "source": "custom_api"
+      "source": "custom_api",
+      "attendees": [
+        {
+          "name": "Alex Buyer",
+          "phone": "+15551234567",
+          "email": "alex@example.com",
+          "uniqueId": "crm-contact-id"
+        }
+      ]
     }
     ```
   </Tab>
@@ -151,6 +185,9 @@ api: "POST https://api.objectionly.com/api/call-processing/queue"
   <Tab title="File upload (multipart)">
     Send a `multipart/form-data` request with form fields like `title`,
     `repEmail`, `callDate`, optional `transcriptText`, and a `file` part.
+    To include attendees in a multipart request, send an `attendees` form field
+    containing a JSON-encoded array, such as
+    `[{"name":"Alex Buyer","phone":"+15551234567"}]`.
 
     Do not manually set the multipart `Content-Type` header; your HTTP client
     should generate it with the boundary.
@@ -245,7 +282,7 @@ api: "POST https://api.objectionly.com/api/call-processing/queue"
 
 | Status | Description |
 | --- | --- |
-| 400 | Missing or invalid fields such as `title`, `repEmail`, `callDate`, `callDuration`, `forceImport`, `source`, malformed `mediaUrl`, or sending `file` and `mediaUrl` together |
+| 400 | Missing or invalid fields such as `title`, `repEmail`, `callDate`, `callDuration`, `forceImport`, `source`, malformed `mediaUrl`, malformed multipart `attendees`, more than 10 attendees, or sending `file` and `mediaUrl` together |
 | 401 | Missing or invalid authentication |
 | 413 | Uploaded or remote media exceeds the 500 MB limit |
 | 415 | Unsupported media type |

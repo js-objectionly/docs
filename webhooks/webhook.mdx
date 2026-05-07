@@ -3,11 +3,127 @@ title: Webhook
 icon: webhook
 ---
 
-## Coming Soon
+Use custom webhooks to receive Objectionly call data after a call finishes
+processing.
 
-Webhook destination documentation is coming soon.
+## Event
 
-<Info>
-  This page will explain how to send Objectionly data to a custom webhook
-  endpoint.
-</Info>
+`call.completed`
+
+Objectionly sends this event when a call reaches the completed state.
+
+## Payload
+
+<ResponseField name="type" type="string" required>
+  Event type. For this event, the value is `call.completed`.
+</ResponseField>
+
+<ResponseField name="callId" type="string" required>
+  Unique Objectionly call identifier.
+</ResponseField>
+
+<ResponseField name="callUrl" type="string" required>
+  Dashboard URL for the call.
+</ResponseField>
+
+<ResponseField name="workspaceId" type="string" required>
+  Workspace identifier.
+</ResponseField>
+
+<ResponseField name="status" type="string" required>
+  Call status. For this event, the value is `completed`.
+</ResponseField>
+
+<ResponseField name="title" type="string" required>
+  Call title.
+</ResponseField>
+
+<ResponseField name="callDate" type="string" required>
+  ISO-8601 call timestamp.
+</ResponseField>
+
+<ResponseField name="processedAt" type="string">
+  ISO-8601 timestamp for when processing completed.
+</ResponseField>
+
+<ResponseField name="rep" type="object">
+  Matched sales rep for the call, when available.
+</ResponseField>
+
+<ResponseField name="attendees" type="array" required>
+  Attendees attached to the call. This is always an array and may be empty.
+</ResponseField>
+
+<ResponseField name="attendees[].name" type="string">
+  Attendee display name, or `null`.
+</ResponseField>
+
+<ResponseField name="attendees[].phone" type="string">
+  Attendee phone number, or `null`.
+</ResponseField>
+
+<ResponseField name="attendees[].email" type="string">
+  Attendee email address, or `null`.
+</ResponseField>
+
+<ResponseField name="attendees[].uniqueId" type="string">
+  Upstream attendee identifier, or `null`.
+</ResponseField>
+
+<ResponseField name="objections" type="array" required>
+  Detected objections.
+</ResponseField>
+
+<ResponseField name="buyingReasons" type="array" required>
+  Detected buying reasons.
+</ResponseField>
+
+<ResponseField name="painPoints" type="array" required>
+  Detected pain points.
+</ResponseField>
+
+<ResponseField name="aspirations" type="array" required>
+  Detected aspirations.
+</ResponseField>
+
+<ResponseField name="scoring" type="object">
+  Call scoring result, when available.
+</ResponseField>
+
+<Note>
+  Attendees are returned in the same order they were accepted during queue
+  ingestion.
+</Note>
+
+## Example
+
+```json
+{
+  "type": "call.completed",
+  "callId": "uuid",
+  "callUrl": "https://app.objectionly.com/dashboard/calls/uuid",
+  "workspaceId": "workspace-id",
+  "status": "completed",
+  "title": "Discovery call - Acme",
+  "callDate": "2026-01-31T18:30:00Z",
+  "processedAt": "2026-01-31T18:45:00Z",
+  "rep": {
+    "id": "rep-id",
+    "email": "rep@acme.com",
+    "name": "Alex Rep"
+  },
+  "attendees": [
+    {
+      "name": "Alex Buyer",
+      "phone": "+15551234567",
+      "email": "alex@example.com",
+      "uniqueId": "crm-contact-id"
+    }
+  ],
+  "objections": [],
+  "buyingReasons": [],
+  "painPoints": [],
+  "aspirations": [],
+  "scoring": null
+}
+```
