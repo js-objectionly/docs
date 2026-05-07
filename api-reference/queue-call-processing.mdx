@@ -91,25 +91,33 @@ api: "POST https://api.objectionly.com/api/call-processing/queue"
   Optional list of call attendees. Send up to `10` attendee objects.
 </ParamField>
 
-<ParamField body="attendees[].name" type="string">
-  Attendee display name.
-</ParamField>
-
-<ParamField body="attendees[].phone" type="string">
-  Attendee phone number.
-</ParamField>
-
-<ParamField body="attendees[].email" type="string">
-  Attendee email address.
-</ParamField>
-
-<ParamField body="attendees[].uniqueId" type="string">
-  Your upstream identifier for the attendee, such as a CRM contact ID.
-</ParamField>
-
 <Info>
   Provide at least one ingest input: `transcriptText`, `mediaUrl`, or `file`.
 </Info>
+
+Attendees should be sent as an array. Each attendee can include `name`, `phone`,
+`email`, and `uniqueId`.
+
+```json
+{
+  "attendees": []
+}
+```
+
+Example with one attendee:
+
+```json
+{
+  "attendees": [
+    {
+      "name": "Alex Buyer",
+      "phone": "+15551234567",
+      "email": "alex@example.com",
+      "uniqueId": "crm-contact-id"
+    }
+  ]
+}
+```
 
 <Note>
   Attendee fields are optional. Objectionly trims attendee values, stores blank
